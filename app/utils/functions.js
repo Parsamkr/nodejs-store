@@ -1,4 +1,5 @@
 const createHttpError = require("http-errors");
+const fs = require("fs");
 const JWT = require("jsonwebtoken");
 const { redisClient } = require("./init_redis");
 const { UserModel } = require("../models/users");
@@ -6,6 +7,7 @@ const {
   ACCESS_TOKEN_SECRET_KEY,
   REFRESH_TOKEN_SECRET_KEY,
 } = require("./constants");
+const path = require("path");
 
 function randomNumberGenerator(length) {
   return Math.floor(
@@ -68,9 +70,15 @@ function verifyRefreshToken(token) {
   });
 }
 
+function deleteFileInPublic(fileAddress) {
+  const pathFile = path.join(__dirname, "..", "..", "public", fileAddress);
+  fs.unlinkSync(pathFile);
+}
+
 module.exports = {
   randomNumberGenerator,
   signAccessToken,
   signRefreshToken,
   verifyRefreshToken,
+  deleteFileInPublic,
 };

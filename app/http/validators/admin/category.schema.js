@@ -12,4 +12,11 @@ const addCategorySchema = Joi.object({
     .error(new Error("parent ID is wromg")),
 });
 
-module.exports = { addCategorySchema };
+const updateCategorySchema = Joi.object({
+  title: Joi.string()
+    .min(3)
+    .max(30)
+    .error(new Error("Category title is incorrect")),
+});
+
+module.exports = { addCategorySchema, updateCategorySchema };
