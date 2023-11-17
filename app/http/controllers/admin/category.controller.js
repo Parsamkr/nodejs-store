@@ -103,7 +103,7 @@ class CategoryController extends Controller {
           parent: undefined,
         },
         { __v: 0 }
-      );
+      ).populate([{ path: "children", select: { __v: 0 } }]);
       return res.status(200).json({ data: { statusCode: 200, categories } });
     } catch (error) {
       next(error);

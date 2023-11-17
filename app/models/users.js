@@ -17,8 +17,9 @@ const Schema = new mongoose.Schema(
     birthday: { type: String },
     roles: { type: [String], default: ["USER"] },
     createdAt: { type: Date, default: new Date().getTime() },
+    courses: { type: [mongoose.Types.ObjectId], default: [], ref: "course" },
   },
-  { versionKey: false }
+  { versionKey: false, toJSON: { virtuals: true } }
 );
 
 module.exports = { UserModel: mongoose.model("user", Schema) };

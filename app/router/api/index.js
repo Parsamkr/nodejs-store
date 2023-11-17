@@ -20,10 +20,6 @@ const {
  *    summary : index of routes
  *    tags : [IndexPage]
  *    description : get all data for index page
- *    parameters :
- *      - in: header
- *        name : access-token
- *        example : Bearer Your token
  *    responses :
  *      200:
  *        description : success

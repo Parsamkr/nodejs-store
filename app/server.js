@@ -35,6 +35,7 @@ module.exports = class Application {
       swaggerUI.setup(
         swaggerJsDoc({
           swaggerDefinition: {
+            openapi: "3.0.0",
             info: {
               title: "Parsa Store",
               version: "1.0.0",
@@ -42,9 +43,20 @@ module.exports = class Application {
               contact: { name: "Parsa", email: "parsamokhtarpour98@gmail.com" },
             },
             servers: [{ url: "http://localhost:5000" }],
+            components: {
+              securitySchemes: {
+                BearerAuth: {
+                  type: "http",
+                  scheme: "bearer",
+                  bearerFormat: "JWT",
+                },
+              },
+            },
+            security: [{ BearerAuth: [] }],
           },
           apis: ["./app/router/**/*.js"],
-        })
+        }),
+        { explorer: true }
       )
     );
   }

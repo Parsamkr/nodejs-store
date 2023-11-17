@@ -19,11 +19,13 @@ Schema.virtual("children", {
   foreignField: "parent",
 });
 
-function autoPopulate(next) {
-  this.populate([{ path: "children", select: { __v: 0 } }]);
-  next();
-}
+// bakhshe paiin age jaii nkhaim children o bgirim bazam mide be ma
 
-Schema.pre("findOne", autoPopulate).pre("find", autoPopulate);
+// function autoPopulate(next) {
+//   this.populate([{ path: "children", select: { __v: 0 } }]);
+//   next();
+// }
+
+//  Schema.pre("findOne", autoPopulate).pre("find", autoPopulate);
 
 module.exports = { CategoryModel: mongoose.model("category", Schema) };

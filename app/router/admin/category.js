@@ -5,19 +5,45 @@ const router = require("express").Router();
 
 /**
  * @swagger
+ *  components :
+ *    schemas:
+ *      CreateCategory:
+ *        type : object
+ *        required :
+ *          - title
+ *        properties:
+ *          title :
+ *            type : string
+ *            description : the user mobile for signup/signin
+ *          parent :
+ *            type : string
+ *            description : parent of category
+ *      UpdateCategory:
+ *        type : object
+ *        properties:
+ *          title :
+ *            type : string
+ *            description : the user mobile for signup/signin
+ *          parent :
+ *            type : string
+ *            description : parent of category
+ */
+
+/**
+ * @swagger
  * /admin/category/add :
  *  post:
  *      tags : [Category(AdminPanel)]
  *      summary : create new category title
- *      parameters :
- *          -   in: formData
- *              type : string
- *              required : true
- *              name : title
- *          -   in: formData
- *              type : string
- *              required : false
- *              name : parent
+ *      requestBody :
+ *        required : true
+ *        content :
+ *          application/x-www-form-urlencoded:
+ *            schema :
+ *              $ref : '#/components/schemas/CreateCategory'
+ *          application/json:
+ *            schema :
+ *              $ref : '#/components/schemas/CreateCategory'
  *      responses:
  *          201 :
  *              description : success
@@ -116,10 +142,15 @@ router.get("/:id", CategoryController.getCategoryById);
  *              type : string
  *              required : true
  *              name : id
- *          -   in: formData
- *              type : string
- *              required : true
- *              name : title
+ *      requestBody :
+ *        required : true
+ *        content :
+ *          application/x-www-form-urlencoded:
+ *            schema :
+ *              $ref : '#/components/schemas/UpdateCategory'
+ *          application/json:
+ *            schema :
+ *              $ref : '#/components/schemas/UpdateCategory'
  *      responses :
  *          200 :
  *              description : success
@@ -129,4 +160,4 @@ router.get("/:id", CategoryController.getCategoryById);
 
 router.patch("/update/:id", CategoryController.editCategoryTitle);
 
-module.exports = { CategoryRoutes: router };
+module.exports = { AdminApiCategoryRouter: router };

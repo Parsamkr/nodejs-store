@@ -61,7 +61,15 @@ function verifyRefreshToken(token) {
         { password: 0, otp: 0, bills: 0 }
       );
       if (!user) reject(createHttpError.Unauthorized("Profile didn't found"));
+      if (user?._id == null)
+        return reject(
+          createHttpError.Unauthorized("logging in again to account failed")
+        );
       const refreshToken = await redisClient.get(user._id.toString());
+      if (!refreshToken)
+        return reject(
+          createHttpError.Unauthorized("logging in again to account failed")
+        );
       if (token === refreshToken) return resolve(mobile);
       reject(
         createHttpError.Unauthorized("logging in again to account failed")
@@ -71,8 +79,18 @@ function verifyRefreshToken(token) {
 }
 
 function deleteFileInPublic(fileAddress) {
-  const pathFile = path.join(__dirname, "..", "..", "public", fileAddress);
-  fs.unlinkSync(pathFile);
+  if (fileAddress) {
+    const pathFile = path.join(__dirname, "..", "..", "public", fileAddress);
+    if (fs.existsSync(pathFile)) fs.unlinkSync(pathFile);
+  }
+}
+
+function ListOfImagesFromRequest(files, fileUploadPath) {
+  if (files?.length > 0) {
+    return files.map((file) => path.join(fileUploadPath, file.filename));
+  } else {
+    return [];
+  }
 }
 
 module.exports = {
@@ -81,4 +99,5 @@ module.exports = {
   signRefreshToken,
   verifyRefreshToken,
   deleteFileInPublic,
+  ListOfImagesFromRequest,
 };

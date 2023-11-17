@@ -15,6 +15,15 @@ const stringToArray = function (field) {
             return item.trim();
           })
           .filter((item) => item);
+      } else if (req.body[field].indexOf(",") >= 0) {
+        req.body[field] = req.body[field]
+          .split(",")
+          .map((item) => {
+            return item.trim();
+          })
+          .filter((item) => item);
+      } else {
+        req.body[field] = [req.body[field]];
       }
     } else if (
       req.body[field] !== undefined &&
