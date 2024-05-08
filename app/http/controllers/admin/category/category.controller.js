@@ -1,11 +1,12 @@
 const createHttpError = require("http-errors");
-const { CategoryModel } = require("../../../models/categories");
-const Controller = require("../controller");
+const { CategoryModel } = require("../../../../models/categories");
+const Controller = require("../../controller");
 const {
   addCategorySchema,
   updateCategorySchema,
-} = require("../../validators/admin/category.schema");
+} = require("../../../validators/admin/category.schema");
 const { ObjectId } = require("mongodb");
+const { StatusCodes: httpStatus } = require("http-status-codes");
 
 class CategoryController extends Controller {
   async addCategory(req, res, next) {
@@ -15,8 +16,11 @@ class CategoryController extends Controller {
       const category = await CategoryModel.create({ title, parent });
       if (!category)
         throw createHttpError.InternalServerError("internal error");
-      return res.status(201).json({
-        data: { statusCode: 201, message: "category addded successfully" },
+      return res.status(httpStatus.CREATED).json({
+        statusCode: httpStatus.CREATED,
+        data: {
+          message: "category addded successfully",
+        },
       });
     } catch (error) {
       next(error);
@@ -39,8 +43,11 @@ class CategoryController extends Controller {
       console.log(deletedResult);
       if (deletedResult == 0)
         throw createHttpError.InternalServerError("deleting category failed");
-      return res.status(200).json({
-        data: { statusCode: 200, message: "category successfully deleted" },
+      return res.status(httpStatus.OK).json({
+        statusCode: httpStatus.OK,
+        data: {
+          message: "category successfully deleted",
+        },
       });
     } catch (error) {
       next(error);
@@ -60,8 +67,11 @@ class CategoryController extends Controller {
         throw createHttpError.InternalServerError(
           "updating the category failed"
         );
-      return res.status(200).json({
-        data: { statusCode: 200, message: "category updated successfully" },
+      return res.status(httpStatus.OK).json({
+        statusCode: httpStatus.OK,
+        data: {
+          message: "category updated successfully",
+        },
       });
     } catch (error) {
       next(error);
@@ -104,7 +114,9 @@ class CategoryController extends Controller {
         },
         { __v: 0 }
       ).populate([{ path: "children", select: { __v: 0 } }]);
-      return res.status(200).json({ data: { statusCode: 200, categories } });
+      return res
+        .status(httpStatus.OK)
+        .json({ statusCode: httpStatus.OK, data: { categories } });
     } catch (error) {
       next(error);
     }
@@ -124,7 +136,9 @@ class CategoryController extends Controller {
         },
         { $project: { __v: 0, "children.__v": 0, "children.parent": 0 } },
       ]);
-      return res.status(200).json({ data: { statusCode: 200, category } });
+      return res
+        .status(httpStatus.OK)
+        .json({ statusCode: httpStatus.OK, data: { category } });
     } catch (error) {
       next(error);
     }
@@ -135,7 +149,9 @@ class CategoryController extends Controller {
         { parent: undefined },
         { __v: 0 }
       );
-      return res.status(200).json({ data: { statusCode: 200, parents } });
+      return res
+        .status(httpStatus.OK)
+        .json({ statusCode: httpStatus.OK, data: { parents } });
     } catch (error) {
       next(error);
     }
@@ -147,7 +163,9 @@ class CategoryController extends Controller {
         { parent },
         { __v: 0, parent: 0 }
       );
-      return res.status(200).json({ data: { statusCode: 200, children } });
+      return res
+        .status(httpStatus.OK)
+        .json({ statusCode: httpStatus.OK, data: { children } });
     } catch (error) {
       next(error);
     }

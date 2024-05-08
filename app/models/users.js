@@ -1,6 +1,6 @@
 const { default: mongoose } = require("mongoose");
 
-const Schema = new mongoose.Schema(
+const userSchema = new mongoose.Schema(
   {
     first_name: { type: String },
     last_name: { type: String },
@@ -15,11 +15,17 @@ const Schema = new mongoose.Schema(
     bills: { type: [], default: [] },
     discount: { type: Number, default: 0 },
     birthday: { type: String },
-    roles: { type: [String], default: ["USER"] },
+    role: { type: String, default: "USER" },
     createdAt: { type: Date, default: new Date().getTime() },
     courses: { type: [mongoose.Types.ObjectId], default: [], ref: "course" },
   },
   { versionKey: false, toJSON: { virtuals: true } }
 );
-
-module.exports = { UserModel: mongoose.model("user", Schema) };
+userSchema.index({
+  first_name: "text",
+  last_name: "text",
+  mobile: "text",
+  username: "text",
+  email: "text",
+});
+module.exports = { UserModel: mongoose.model("user", userSchema) };

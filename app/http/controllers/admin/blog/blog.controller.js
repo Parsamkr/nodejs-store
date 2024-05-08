@@ -1,9 +1,21 @@
 const path = require("path");
-const { createBlogSchema } = require("../../validators/admin/blog.schema");
-const Controller = require("../controller");
-const { BlogModel } = require("../../../models/blogs");
-const { deleteFileInPublic } = require("../../../utils/functions");
+const { createBlogSchema } = require("../../../validators/admin/blog.schema");
+const Controller = require("../../controller");
+const { BlogModel } = require("../../../../models/blogs");
+const {
+  deleteFileInPublic,
+  deleteInvalidPropertyInObject,
+} = require("../../../../utils/functions");
 const createHttpError = require("http-errors");
+const { StatusCodes: httpStatus } = require("http-status-codes");
+const BlogBlackList = {
+  BOOKMARKS: "bookmarks",
+  LIKES: "likes",
+  DISLIKES: "dislikes",
+  COMMENTS: "comments",
+  AUTHOR: "author",
+};
+Object.freeze(BlogBlackList);
 
 class BlogController extends Controller {
   async createBlog(req, res, next) {
@@ -15,8 +27,9 @@ class BlogController extends Controller {
       );
 
       const { title, text, short_text, category, tags } = blogDataBody;
-      const image = req.body.image;
+
       const author = req.user._id;
+      const image = req.body.image;
       const blog = await BlogModel.create({
         title,
         text,
@@ -27,8 +40,11 @@ class BlogController extends Controller {
         author,
       });
 
-      return res.status(201).json({
-        data: { statusCode: 201, message: "blog created successfully" },
+      return res.status(httpStatus.CREATED).json({
+        statusCode: httpStatus.CREATED,
+        data: {
+          message: "blog created successfully",
+        },
       });
     } catch (error) {
       deleteFileInPublic(req.body.image);
@@ -39,9 +55,9 @@ class BlogController extends Controller {
     try {
       const { id } = req.params;
       const blog = await this.findBlog({ _id: id });
-      return res.status(200).json({
+      return res.status(httpStatus.OK).json({
+        statusCode: httpStatus.OK,
         data: {
-          statusCode: 200,
           blog,
         },
       });
@@ -81,7 +97,9 @@ class BlogController extends Controller {
           },
         },
       ]);
-      return res.status(200).json({ data: { statusCode: 200, blogs } });
+      return res
+        .status(httpStatus.OK)
+        .json({ statusCode: httpStatus.OK, data: { blogs } });
     } catch (error) {
       next(error);
     }
@@ -99,8 +117,11 @@ class BlogController extends Controller {
       const result = await BlogModel.deleteOne({ _id: id });
       if (result.deletedCount == 0)
         throw createHttpError.InternalServerError("failed to delete the blog");
-      res.status(200).json({
-        data: { statusCode: 200, message: "blog deleted successfully" },
+      res.status(httpStatus.OK).json({
+        statusCode: httpStatus.OK,
+        data: {
+          message: "blog deleted successfully",
+        },
       });
     } catch (error) {
       next(error);
@@ -110,26 +131,14 @@ class BlogController extends Controller {
     try {
       const { id } = req.params;
       await this.findBlog({ _id: id });
-      if (req.body.fileUploadPath && req.body.fileName) {
+      if (req?.body?.fileUploadPath && req?.body?.fileName) {
         req.body.image = path.join(req.body.fileUploadPath, req.body.fileName);
       }
       const data = req.body;
 
-      let nullishData = ["", " ", "0", 0, null, undefined];
-      let blackListFields = [
-        "bookmarks",
-        "dislikes",
-        "likes",
-        "comments",
-        "author",
-      ];
-      Object.keys(data).forEach((key) => {
-        if (blackListFields.includes(key)) delete data[key];
-        if (typeof data[key] == "string") data[key] = data[key].trim();
-        if (Array.isArray(data[key]) && data[key].length > 0)
-          data[key] = data[key].map((item) => item.trim());
-        if (nullishData.includes(data[key])) delete data[key];
-      });
+      let blackListFields = Object.values(BlogBlackList);
+
+      deleteInvalidPropertyInObject(data, blackListFields);
 
       const updateResult = await BlogModel.updateOne(
         { _id: id },
@@ -137,11 +146,14 @@ class BlogController extends Controller {
       );
       if (updateResult.modifiedCount == 0)
         throw createHttpError.InternalServerError("updating the blog failed");
-      return res.status(200).json({
-        data: { statusCode: 200, message: "blog updated successfully" },
+      return res.status(httpStatus.OK).json({
+        statusCode: httpStatus.OK,
+        data: {
+          message: "blog updated successfully",
+        },
       });
     } catch (error) {
-      deleteFileInPublic(req.body.image || "");
+      deleteFileInPublic(req.body.image);
       next(error);
     }
   }

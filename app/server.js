@@ -1,5 +1,6 @@
 const express = require("express");
 const path = require("path");
+require("dotenv").config();
 const { AllRoutes } = require("./router/router");
 const morgan = require("morgan");
 const createError = require("http-errors");

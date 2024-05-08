@@ -1,12 +1,22 @@
 module.exports = {
   MongoIDPattern: /^(?=[a-f\d]{24}$)(\d+[a-f]|[a-f]+\d)/i,
-  ROLES: {
+  ROLES: Object.freeze({
     USER: "USER",
     ADMIN: "ADMIN",
-    WRITER: "WRITER",
+    CONTENT_MANAGER: "CONTENT_MANAGER",
     TEACHER: "TEACHER",
     SUPPLIER: "SUPPLIER",
-  },
+  }),
+  PERMISSIONS: Object.freeze({
+    USER: ["profile"],
+    ADMIN: ["all"],
+    SUPERADMIN: ["all"],
+    CONTENT_MANAGER: ["course", "blog", "category", "product"],
+    TEACHER: ["course", "blog"],
+    SUPPLIER: ["product"],
+    ALL: "all",
+  }),
+
   // parsastore-hashstring
   ACCESS_TOKEN_SECRET_KEY:
     "E2860152BE04271CD82B63A6926767B282C4138FB4F9CAA65615BDAA211C0044",

@@ -2,16 +2,17 @@ const createHttpError = require("http-errors");
 const {
   getOtpSchema,
   checkOtpSchema,
-} = require("../../validators/user/auth.schema");
+} = require("../../../validators/user/auth.schema");
 const {
   randomNumberGenerator,
   signAccessToken,
   verifyRefreshToken,
   signRefreshToken,
-} = require("../../../utils/functions");
-const { UserModel } = require("../../../models/users");
-const { ROLES } = require("../../../utils/constants");
-const Controller = require("../controller");
+} = require("../../../../utils/functions");
+const { UserModel } = require("../../../../models/users");
+const { ROLES } = require("../../../../utils/constants");
+const Controller = require("../../controller");
+const { StatusCodes: httpStatus } = require("http-status-codes");
 
 class UserAuthController extends Controller {
   async getOtp(req, res, next) {
@@ -19,12 +20,11 @@ class UserAuthController extends Controller {
       await getOtpSchema.validateAsync(req.body);
       const { mobile } = req.body;
       const code = randomNumberGenerator(5);
-      console.log(code);
       const result = await this.saveUser(mobile, code);
       if (!result) throw createHttpError.Unauthorized("login failed");
-      return res.status(200).send({
+      return res.status(httpStatus.OK).send({
+        statusCode: httpStatus.OK,
         data: {
-          statusCode: 200,
           message: "authorization code has been sent successfully",
           code,
           mobile,
@@ -49,7 +49,10 @@ class UserAuthController extends Controller {
       const accessToken = await signAccessToken(user._id);
       const refreshToken = await signRefreshToken(user._id);
 
-      return res.json({ data: { accessToken, refreshToken } });
+      return res.json({
+        statusCode: httpStatus.OK,
+        data: { accessToken, refreshToken },
+      });
     } catch (error) {
       next(error);
     }
@@ -61,7 +64,7 @@ class UserAuthController extends Controller {
     if (result) {
       return await this.updateUser(mobile, { otp });
     }
-    return !!(await UserModel.create({ mobile, otp, roles: [ROLES.USER] }));
+    return !!(await UserModel.create({ mobile, otp, role: [ROLES.USER] }));
   }
 
   async checkExistUser(mobile) {
@@ -88,7 +91,10 @@ class UserAuthController extends Controller {
       const user = await UserModel.findOne({ mobile });
       const accessToken = await signAccessToken(user._id);
       const newRefreshToken = await signRefreshToken(user._id);
-      return res.json({ data: { accessToken, refreshToken: newRefreshToken } });
+      return res.json({
+        statusCode: httpStatus.OK,
+        data: { accessToken, refreshToken: newRefreshToken },
+      });
     } catch (error) {
       next(error);
     }

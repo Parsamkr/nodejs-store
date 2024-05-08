@@ -50,12 +50,28 @@ function fileFilter(req, file, cb) {
   return cb(createHttpError.BadRequest("image format is incorrect"));
 }
 
-const maxSize = 1 * 1000 * 1000;
+function VideoFilter(req, file, cb) {
+  const ext = path.extname(file.originalname).toLowerCase();
+  const mimetypes = [".mp4", ".mpg", ".mkv", ".avr"];
+  if (mimetypes.includes(ext)) {
+    return cb(null, true);
+  }
+  return cb(createHttpError.BadRequest("video format is incorrect"));
+}
+
+const pictureMaxSize = 1 * 1000 * 1000;
+const videoMaxSize = 1000 * 1000 * 1000;
 
 const uploadFile = multer({
   storage,
   fileFilter,
-  limits: { fileSize: maxSize },
+  limits: { fileSize: pictureMaxSize },
 });
 
-module.exports = { uploadFile };
+const uploadVideo = multer({
+  storage,
+  VideoFilter,
+  limits: { fileSize: videoMaxSize },
+});
+
+module.exports = { uploadFile, uploadVideo };

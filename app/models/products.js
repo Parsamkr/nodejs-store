@@ -1,7 +1,7 @@
 const { default: mongoose } = require("mongoose");
 const { CommentSchema } = require("./public.shema");
 
-const Schema = new mongoose.Schema(
+const ProductSchema = new mongoose.Schema(
   {
     title: { type: String, required: true },
     short_text: { type: String, required: true },
@@ -23,7 +23,7 @@ const Schema = new mongoose.Schema(
     type: { type: String, required: true }, // physical or virtual
     format: { type: String },
     supplier: { type: mongoose.Types.ObjectId, required: true },
-    feature: {
+    features: {
       type: Object,
       default: {
         length: "",
@@ -36,7 +36,16 @@ const Schema = new mongoose.Schema(
       },
     },
   },
-  { versionKey: false }
+  { versionKey: false, toJSON: { virtuals: true } }
 );
 
-module.exports = { ProductModel: mongoose.model("product", Schema) };
+ProductSchema.index({ title: "text", short_text: "text", text: "text" });
+
+ProductSchema.virtual("imagesURL").get(function () {
+  return this.images.map(
+    (image) =>
+      `${process.env.BASE_URL}:${process.env.APPLICATION_PORT}/${image}`
+  );
+});
+
+module.exports = { ProductModel: mongoose.model("product", ProductSchema) };

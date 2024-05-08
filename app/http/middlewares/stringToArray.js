@@ -25,16 +25,16 @@ const stringToArray = function (field) {
       } else {
         req.body[field] = [req.body[field]];
       }
-    } else if (
-      req.body[field] !== undefined &&
-      req.body[field].constructor.toString().toLowerCase().indexOf("array") >= 0
-    ) {
+    }
+    if (Array.isArray(req.body[field])) {
       req.body[field] = req.body[field].map((item) => {
-        item.trim();
+        return typeof item === "string" ? item.trim() : item;
       });
+      req.body[field] = [...new Set(req.body[field])];
     } else {
       req.body[field] = [];
     }
+
     next();
   };
 };
