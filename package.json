@@ -5,7 +5,16 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon node index.js"
+    "start": "node --watch index.js",
+    "dev": "nodemon index.js",
+    "seed": "node seed.js",
+    "docker:start": "./start-docker.sh start",
+    "docker:stop": "./start-docker.sh stop",
+    "docker:restart": "./start-docker.sh restart",
+    "docker:status": "./start-docker.sh status",
+    "docker:logs": "./start-docker.sh logs",
+    "setup": "npm install && ./start-docker.sh start",
+    "dev:full": "npm run docker:start && npm run dev"
   },
   "keywords": [],
   "author": "",
@@ -18,20 +27,25 @@
     "bcrypt": "5.1.1",
     "cors": "2.8.5",
     "dotenv": "16.3.1",
-    "express": "4.18.2",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "express-ejs-layouts": "^2.5.1",
     "express-graphql": "^0.12.0",
     "get-video-duration": "^4.1.0",
-    "graphql": "^16.8.1",
+    "graphql": "^14.7.0",
     "http-errors": "2.0.0",
-    "jsonwebtoken": "9.0.2",
-    "mongoose": "7.5.0",
-    "morgan": "1.10.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.8.3",
+    "morgan": "^1.10.1",
     "multer": "1.4.5-lts.1",
     "redis": "4.6.8",
+    "socket.io": "^4.8.1",
     "swagger-jsdoc": "6.2.8",
     "swagger-ui-express": "5.0.0"
   },
   "devDependencies": {
-    "http-status-codes": "2.3.0"
+    "http-status-codes": "2.3.0",
+    "nodemon": "^3.0.1",
+    "swagger-autogen": "^2.23.7"
   }
 }

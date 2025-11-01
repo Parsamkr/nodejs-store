@@ -16,6 +16,7 @@ function checkPermission(requiredPermissions = []) {
       const permissions = await PermissionModel.find({
         _id: { $in: role.permissions },
       });
+      console.log(permissions, requiredPermissions);
       const userPermissions = permissions.map((item) => item.name);
       const hasPermission = allPermissions.every((permission) => {
         return userPermissions.includes(permission);

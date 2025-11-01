@@ -1,0 +1,3287 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Parsa Store API",
+    "description": "A comprehensive Node.js online store API with authentication, products, courses, blogs, and more",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Parsa",
+      "email": "parsamokhtarpour98@gmail.com"
+    }
+  },
+  "host": "localhost:5000",
+  "basePath": "/",
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "securityDefinitions": {
+    "BearerAuth": {
+      "type": "http",
+      "scheme": "bearer",
+      "bearerFormat": "JWT",
+      "description": "Enter JWT token"
+    }
+  },
+  "consumes": [
+    "application/json",
+    "multipart/form-data"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/user/get-otp": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "mobile": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/user/check-otp": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "mobile": {
+                  "example": "any"
+                },
+                "code": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/user/refresh-token": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "refreshToken": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/admin/category/add": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "example": "any"
+                },
+                "parent": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/admin/category/parents": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/admin/category/children/{parent}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "parent",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/admin/category/all": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/admin/category/remove/{id}": {
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/admin/category/{id}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/admin/category/update/{id}": {
+      "patch": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/admin/blogs/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/admin/blogs/add": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "image": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/admin/blogs/{id}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/admin/blogs/update/{id}": {
+      "patch": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "image": {
+                  "example": "any"
+                },
+                "fileUploadPath": {
+                  "example": "any"
+                },
+                "fileName": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/admin/products/add": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "images": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/admin/products/list": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/admin/products/{id}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/admin/products/remove/{id}": {
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/admin/products/edit/{id}": {
+      "patch": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "images": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/admin/courses/add": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "image": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/admin/courses/list": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "search",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/admin/courses/{id}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/admin/courses/update/{id}": {
+      "patch": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "image": {
+                  "example": "any"
+                },
+                "fileName": {
+                  "example": "any"
+                },
+                "fileUploadPath": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/admin/chapters/add": {
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "example": "any"
+                },
+                "title": {
+                  "example": "any"
+                },
+                "text": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/admin/chapters/list/{courseID}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "courseID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/admin/chapters/remove/{chapterID}": {
+      "patch": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "chapterID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/admin/chapters/update/{chapterID}": {
+      "patch": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "chapterID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/admin/episodes/add": {
+      "post": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/admin/episodes/remove/{episodeID}": {
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "episodeID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/admin/episodes/update/{episodeID}": {
+      "patch": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "episodeID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "videoAddress": {
+                  "example": "any"
+                },
+                "time": {
+                  "example": "any"
+                },
+                "fileName": {
+                  "example": "any"
+                },
+                "fileUploadPath": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/admin/users/list": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "search",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/admin/users/update-profile": {
+      "patch": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/admin/users/profile": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/admin/roles/list": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/admin/roles/add": {
+      "post": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/admin/roles/remove/{field}": {
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "field",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/admin/roles/update/{id}": {
+      "patch": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/admin/permissions/list": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/admin/permissions/add": {
+      "post": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/admin/permissions/remove/{id}": {
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/admin/permissions/update/{id}": {
+      "patch": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/developer/password-hash/{password}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "password",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/developer/random-number/{length}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "length",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "any"
+                },
+                "description": {
+                  "example": "any"
+                },
+                "image": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/support/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/category/add": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "example": "any"
+                },
+                "parent": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/category/parents": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/category/children/{parent}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "parent",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/category/all": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/category/remove/{id}": {
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/category/{id}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/category/update/{id}": {
+      "patch": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/blogs/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/blogs/add": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "image": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/blogs/{id}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/blogs/update/{id}": {
+      "patch": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "image": {
+                  "example": "any"
+                },
+                "fileUploadPath": {
+                  "example": "any"
+                },
+                "fileName": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/products/add": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "images": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/products/list": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/products/{id}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/products/remove/{id}": {
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/products/edit/{id}": {
+      "patch": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "images": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/courses/add": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "image": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/courses/list": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "search",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/courses/{id}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/courses/update/{id}": {
+      "patch": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "image": {
+                  "example": "any"
+                },
+                "fileName": {
+                  "example": "any"
+                },
+                "fileUploadPath": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/chapters/add": {
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "example": "any"
+                },
+                "title": {
+                  "example": "any"
+                },
+                "text": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/chapters/list/{courseID}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "courseID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/chapters/remove/{chapterID}": {
+      "patch": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "chapterID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/chapters/update/{chapterID}": {
+      "patch": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "chapterID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/episodes/add": {
+      "post": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/episodes/remove/{episodeID}": {
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "episodeID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/episodes/update/{episodeID}": {
+      "patch": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "episodeID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "videoAddress": {
+                  "example": "any"
+                },
+                "time": {
+                  "example": "any"
+                },
+                "fileName": {
+                  "example": "any"
+                },
+                "fileUploadPath": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/users/list": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "search",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/users/update-profile": {
+      "patch": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/users/profile": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/roles/list": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/roles/add": {
+      "post": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/roles/remove/{field}": {
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "field",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/roles/update/{id}": {
+      "patch": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/permissions/list": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/permissions/add": {
+      "post": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/permissions/remove/{id}": {
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/permissions/update/{id}": {
+      "patch": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/add": {
+      "post": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "example": "any"
+                },
+                "title": {
+                  "example": "any"
+                },
+                "text": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/{id}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/update/{id}": {
+      "patch": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/parents": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/children/{parent}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "parent",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/all": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/remove/{id}": {
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/list/{courseID}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "courseID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/remove/{chapterID}": {
+      "patch": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "chapterID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/update/{chapterID}": {
+      "patch": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "chapterID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/list": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "search",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/remove/{episodeID}": {
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "episodeID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/update/{episodeID}": {
+      "patch": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "episodeID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "videoAddress": {
+                  "example": "any"
+                },
+                "time": {
+                  "example": "any"
+                },
+                "fileName": {
+                  "example": "any"
+                },
+                "fileUploadPath": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/edit/{id}": {
+      "patch": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "images": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/remove/{field}": {
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "field",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/update-profile": {
+      "patch": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/profile": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/get-otp": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "mobile": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/check-otp": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "mobile": {
+                  "example": "any"
+                },
+                "code": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/refresh-token": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "refreshToken": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/password-hash/{password}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "password",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/random-number/{length}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "length",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SuccessResponse": {
+      "type": "object",
+      "properties": {
+        "statusCode": {
+          "type": "number",
+          "example": 200
+        },
+        "success": {
+          "type": "boolean",
+          "example": true
+        },
+        "message": {
+          "type": "string",
+          "example": "Operation completed successfully"
+        },
+        "data": {
+          "type": "object",
+          "properties": {}
+        }
+      }
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "properties": {
+        "statusCode": {
+          "type": "number",
+          "example": 400
+        },
+        "success": {
+          "type": "boolean",
+          "example": false
+        },
+        "message": {
+          "type": "string",
+          "example": "Error message"
+        },
+        "errors": {
+          "type": "object",
+          "properties": {}
+        }
+      }
+    },
+    "ValidationError": {
+      "type": "object",
+      "properties": {
+        "statusCode": {
+          "type": "number",
+          "example": 422
+        },
+        "success": {
+          "type": "boolean",
+          "example": false
+        },
+        "message": {
+          "type": "string",
+          "example": "Validation error"
+        },
+        "errors": {
+          "type": "object",
+          "properties": {
+            "field": {
+              "type": "string",
+              "example": "Error message for field"
+            }
+          }
+        }
+      }
+    },
+    "UnauthorizedError": {
+      "type": "object",
+      "properties": {
+        "statusCode": {
+          "type": "number",
+          "example": 401
+        },
+        "success": {
+          "type": "boolean",
+          "example": false
+        },
+        "message": {
+          "type": "string",
+          "example": "Unauthorized access"
+        },
+        "errors": {
+          "type": "object",
+          "properties": {
+            "message": {
+              "type": "string",
+              "example": "Access token is required"
+            }
+          }
+        }
+      }
+    },
+    "ForbiddenError": {
+      "type": "object",
+      "properties": {
+        "statusCode": {
+          "type": "number",
+          "example": 403
+        },
+        "success": {
+          "type": "boolean",
+          "example": false
+        },
+        "message": {
+          "type": "string",
+          "example": "Forbidden access"
+        },
+        "errors": {
+          "type": "object",
+          "properties": {
+            "message": {
+              "type": "string",
+              "example": "Insufficient permissions"
+            }
+          }
+        }
+      }
+    },
+    "NotFoundError": {
+      "type": "object",
+      "properties": {
+        "statusCode": {
+          "type": "number",
+          "example": 404
+        },
+        "success": {
+          "type": "boolean",
+          "example": false
+        },
+        "message": {
+          "type": "string",
+          "example": "Resource not found"
+        },
+        "errors": {
+          "type": "object",
+          "properties": {
+            "message": {
+              "type": "string",
+              "example": "The requested resource was not found"
+            }
+          }
+        }
+      }
+    },
+    "ServerError": {
+      "type": "object",
+      "properties": {
+        "statusCode": {
+          "type": "number",
+          "example": 500
+        },
+        "success": {
+          "type": "boolean",
+          "example": false
+        },
+        "message": {
+          "type": "string",
+          "example": "Internal server error"
+        },
+        "errors": {
+          "type": "object",
+          "properties": {
+            "message": {
+              "type": "string",
+              "example": "Something went wrong on the server"
+            }
+          }
+        }
+      }
+    },
+    "User": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example": "string"
+        },
+        "first_name": {
+          "type": "string",
+          "example": "string"
+        },
+        "last_name": {
+          "type": "string",
+          "example": "string"
+        },
+        "mobile": {
+          "type": "string",
+          "example": "string"
+        },
+        "email": {
+          "type": "string",
+          "example": "string"
+        },
+        "otp": {
+          "type": "object",
+          "properties": {
+            "code": {
+              "type": "string",
+              "example": "string"
+            },
+            "expiresIn": {
+              "type": "string",
+              "example": "number"
+            }
+          }
+        },
+        "bills": {
+          "type": "string",
+          "example": "array"
+        },
+        "discount": {
+          "type": "string",
+          "example": "number"
+        },
+        "birthday": {
+          "type": "string",
+          "example": "string"
+        },
+        "roles": {
+          "type": "string",
+          "example": "array"
+        },
+        "courses": {
+          "type": "string",
+          "example": "array"
+        },
+        "createdAt": {
+          "type": "string",
+          "example": "string"
+        },
+        "updatedAt": {
+          "type": "string",
+          "example": "string"
+        }
+      }
+    },
+    "UserCreate": {
+      "type": "object",
+      "properties": {
+        "first_name": {
+          "type": "string",
+          "example": "string"
+        },
+        "last_name": {
+          "type": "string",
+          "example": "string"
+        },
+        "mobile": {
+          "type": "string",
+          "example": "string"
+        },
+        "email": {
+          "type": "string",
+          "example": "string"
+        }
+      }
+    },
+    "UserUpdate": {
+      "type": "object",
+      "properties": {
+        "first_name": {
+          "type": "string",
+          "example": "string"
+        },
+        "last_name": {
+          "type": "string",
+          "example": "string"
+        },
+        "mobile": {
+          "type": "string",
+          "example": "string"
+        },
+        "email": {
+          "type": "string",
+          "example": "string"
+        },
+        "birthday": {
+          "type": "string",
+          "example": "string"
+        }
+      }
+    },
+    "LoginRequest": {
+      "type": "object",
+      "properties": {
+        "mobile": {
+          "type": "string",
+          "example": "string"
+        }
+      }
+    },
+    "VerifyOtpRequest": {
+      "type": "object",
+      "properties": {
+        "mobile": {
+          "type": "string",
+          "example": "string"
+        },
+        "code": {
+          "type": "string",
+          "example": "string"
+        }
+      }
+    },
+    "RefreshTokenRequest": {
+      "type": "object",
+      "properties": {
+        "refreshToken": {
+          "type": "string",
+          "example": "string"
+        }
+      }
+    },
+    "AuthResponse": {
+      "type": "object",
+      "properties": {
+        "statusCode": {
+          "type": "number",
+          "example": 200
+        },
+        "success": {
+          "type": "boolean",
+          "example": true
+        },
+        "message": {
+          "type": "string",
+          "example": "Authentication successful"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "user": {
+              "type": "string",
+              "example": "User"
+            },
+            "accessToken": {
+              "type": "string",
+              "example": "string"
+            },
+            "refreshToken": {
+              "type": "string",
+              "example": "string"
+            }
+          }
+        }
+      }
+    },
+    "Product": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example": "string"
+        },
+        "title": {
+          "type": "string",
+          "example": "string"
+        },
+        "text": {
+          "type": "string",
+          "example": "string"
+        },
+        "short_text": {
+          "type": "string",
+          "example": "string"
+        },
+        "images": {
+          "type": "string",
+          "example": "array"
+        },
+        "tags": {
+          "type": "string",
+          "example": "array"
+        },
+        "category": {
+          "type": "string",
+          "example": "string"
+        },
+        "price": {
+          "type": "string",
+          "example": "number"
+        },
+        "discount": {
+          "type": "string",
+          "example": "number"
+        },
+        "count": {
+          "type": "string",
+          "example": "number"
+        },
+        "type": {
+          "type": "string",
+          "example": "string"
+        },
+        "format": {
+          "type": "string",
+          "example": "string"
+        },
+        "supplier": {
+          "type": "string",
+          "example": "string"
+        },
+        "features": {
+          "type": "string",
+          "example": "object"
+        },
+        "colors": {
+          "type": "string",
+          "example": "array"
+        },
+        "sizes": {
+          "type": "string",
+          "example": "array"
+        },
+        "createdAt": {
+          "type": "string",
+          "example": "string"
+        },
+        "updatedAt": {
+          "type": "string",
+          "example": "string"
+        }
+      }
+    },
+    "ProductCreate": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "example": "string"
+        },
+        "text": {
+          "type": "string",
+          "example": "string"
+        },
+        "short_text": {
+          "type": "string",
+          "example": "string"
+        },
+        "images": {
+          "type": "string",
+          "example": "array"
+        },
+        "tags": {
+          "type": "string",
+          "example": "array"
+        },
+        "category": {
+          "type": "string",
+          "example": "string"
+        },
+        "price": {
+          "type": "string",
+          "example": "number"
+        },
+        "discount": {
+          "type": "string",
+          "example": "number"
+        },
+        "count": {
+          "type": "string",
+          "example": "number"
+        },
+        "type": {
+          "type": "string",
+          "example": "string"
+        },
+        "format": {
+          "type": "string",
+          "example": "string"
+        },
+        "supplier": {
+          "type": "string",
+          "example": "string"
+        },
+        "features": {
+          "type": "string",
+          "example": "object"
+        },
+        "colors": {
+          "type": "string",
+          "example": "array"
+        },
+        "sizes": {
+          "type": "string",
+          "example": "array"
+        }
+      }
+    },
+    "ProductUpdate": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "example": "string"
+        },
+        "text": {
+          "type": "string",
+          "example": "string"
+        },
+        "short_text": {
+          "type": "string",
+          "example": "string"
+        },
+        "images": {
+          "type": "string",
+          "example": "array"
+        },
+        "tags": {
+          "type": "string",
+          "example": "array"
+        },
+        "category": {
+          "type": "string",
+          "example": "string"
+        },
+        "price": {
+          "type": "string",
+          "example": "number"
+        },
+        "discount": {
+          "type": "string",
+          "example": "number"
+        },
+        "count": {
+          "type": "string",
+          "example": "number"
+        },
+        "type": {
+          "type": "string",
+          "example": "string"
+        },
+        "format": {
+          "type": "string",
+          "example": "string"
+        },
+        "supplier": {
+          "type": "string",
+          "example": "string"
+        },
+        "features": {
+          "type": "string",
+          "example": "object"
+        },
+        "colors": {
+          "type": "string",
+          "example": "array"
+        },
+        "sizes": {
+          "type": "string",
+          "example": "array"
+        }
+      }
+    },
+    "Category": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example": "string"
+        },
+        "title": {
+          "type": "string",
+          "example": "string"
+        },
+        "parent": {
+          "type": "string",
+          "example": "string"
+        },
+        "children": {
+          "type": "string",
+          "example": "array"
+        },
+        "createdAt": {
+          "type": "string",
+          "example": "string"
+        },
+        "updatedAt": {
+          "type": "string",
+          "example": "string"
+        }
+      }
+    },
+    "CategoryCreate": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "example": "string"
+        },
+        "parent": {
+          "type": "string",
+          "example": "string"
+        }
+      }
+    },
+    "CategoryUpdate": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "example": "string"
+        },
+        "parent": {
+          "type": "string",
+          "example": "string"
+        }
+      }
+    },
+    "Blog": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example": "string"
+        },
+        "author": {
+          "type": "string",
+          "example": "string"
+        },
+        "title": {
+          "type": "string",
+          "example": "string"
+        },
+        "text": {
+          "type": "string",
+          "example": "string"
+        },
+        "short_text": {
+          "type": "string",
+          "example": "string"
+        },
+        "images": {
+          "type": "string",
+          "example": "array"
+        },
+        "tags": {
+          "type": "string",
+          "example": "array"
+        },
+        "category": {
+          "type": "string",
+          "example": "string"
+        },
+        "comments": {
+          "type": "string",
+          "example": "array"
+        },
+        "likes": {
+          "type": "string",
+          "example": "array"
+        },
+        "dislikes": {
+          "type": "string",
+          "example": "array"
+        },
+        "bookmarks": {
+          "type": "string",
+          "example": "array"
+        },
+        "createdAt": {
+          "type": "string",
+          "example": "string"
+        },
+        "updatedAt": {
+          "type": "string",
+          "example": "string"
+        }
+      }
+    },
+    "BlogCreate": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "example": "string"
+        },
+        "text": {
+          "type": "string",
+          "example": "string"
+        },
+        "short_text": {
+          "type": "string",
+          "example": "string"
+        },
+        "images": {
+          "type": "string",
+          "example": "array"
+        },
+        "tags": {
+          "type": "string",
+          "example": "array"
+        },
+        "category": {
+          "type": "string",
+          "example": "string"
+        }
+      }
+    },
+    "BlogUpdate": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "example": "string"
+        },
+        "text": {
+          "type": "string",
+          "example": "string"
+        },
+        "short_text": {
+          "type": "string",
+          "example": "string"
+        },
+        "images": {
+          "type": "string",
+          "example": "array"
+        },
+        "tags": {
+          "type": "string",
+          "example": "array"
+        },
+        "category": {
+          "type": "string",
+          "example": "string"
+        }
+      }
+    },
+    "Course": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example": "string"
+        },
+        "title": {
+          "type": "string",
+          "example": "string"
+        },
+        "text": {
+          "type": "string",
+          "example": "string"
+        },
+        "short_text": {
+          "type": "string",
+          "example": "string"
+        },
+        "images": {
+          "type": "string",
+          "example": "array"
+        },
+        "tags": {
+          "type": "string",
+          "example": "array"
+        },
+        "category": {
+          "type": "string",
+          "example": "string"
+        },
+        "price": {
+          "type": "string",
+          "example": "number"
+        },
+        "discount": {
+          "type": "string",
+          "example": "number"
+        },
+        "type": {
+          "type": "string",
+          "example": "string"
+        },
+        "format": {
+          "type": "string",
+          "example": "string"
+        },
+        "teacher": {
+          "type": "string",
+          "example": "string"
+        },
+        "students": {
+          "type": "string",
+          "example": "array"
+        },
+        "chapters": {
+          "type": "string",
+          "example": "array"
+        },
+        "status": {
+          "type": "string",
+          "example": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "example": "string"
+        },
+        "updatedAt": {
+          "type": "string",
+          "example": "string"
+        }
+      }
+    },
+    "CourseCreate": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "example": "string"
+        },
+        "text": {
+          "type": "string",
+          "example": "string"
+        },
+        "short_text": {
+          "type": "string",
+          "example": "string"
+        },
+        "images": {
+          "type": "string",
+          "example": "array"
+        },
+        "tags": {
+          "type": "string",
+          "example": "array"
+        },
+        "category": {
+          "type": "string",
+          "example": "string"
+        },
+        "price": {
+          "type": "string",
+          "example": "number"
+        },
+        "discount": {
+          "type": "string",
+          "example": "number"
+        },
+        "type": {
+          "type": "string",
+          "example": "string"
+        },
+        "format": {
+          "type": "string",
+          "example": "string"
+        },
+        "teacher": {
+          "type": "string",
+          "example": "string"
+        }
+      }
+    },
+    "CourseUpdate": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "example": "string"
+        },
+        "text": {
+          "type": "string",
+          "example": "string"
+        },
+        "short_text": {
+          "type": "string",
+          "example": "string"
+        },
+        "images": {
+          "type": "string",
+          "example": "array"
+        },
+        "tags": {
+          "type": "string",
+          "example": "array"
+        },
+        "category": {
+          "type": "string",
+          "example": "string"
+        },
+        "price": {
+          "type": "string",
+          "example": "number"
+        },
+        "discount": {
+          "type": "string",
+          "example": "number"
+        },
+        "type": {
+          "type": "string",
+          "example": "string"
+        },
+        "format": {
+          "type": "string",
+          "example": "string"
+        },
+        "teacher": {
+          "type": "string",
+          "example": "string"
+        }
+      }
+    },
+    "Chapter": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example": "string"
+        },
+        "title": {
+          "type": "string",
+          "example": "string"
+        },
+        "text": {
+          "type": "string",
+          "example": "string"
+        },
+        "episodes": {
+          "type": "string",
+          "example": "array"
+        },
+        "course": {
+          "type": "string",
+          "example": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "example": "string"
+        },
+        "updatedAt": {
+          "type": "string",
+          "example": "string"
+        }
+      }
+    },
+    "ChapterCreate": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "example": "string"
+        },
+        "text": {
+          "type": "string",
+          "example": "string"
+        },
+        "course": {
+          "type": "string",
+          "example": "string"
+        }
+      }
+    },
+    "ChapterUpdate": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "example": "string"
+        },
+        "text": {
+          "type": "string",
+          "example": "string"
+        }
+      }
+    },
+    "Episode": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example": "string"
+        },
+        "title": {
+          "type": "string",
+          "example": "string"
+        },
+        "text": {
+          "type": "string",
+          "example": "string"
+        },
+        "type": {
+          "type": "string",
+          "example": "string"
+        },
+        "time": {
+          "type": "string",
+          "example": "string"
+        },
+        "video": {
+          "type": "string",
+          "example": "string"
+        },
+        "chapter": {
+          "type": "string",
+          "example": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "example": "string"
+        },
+        "updatedAt": {
+          "type": "string",
+          "example": "string"
+        }
+      }
+    },
+    "EpisodeCreate": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "example": "string"
+        },
+        "text": {
+          "type": "string",
+          "example": "string"
+        },
+        "type": {
+          "type": "string",
+          "example": "string"
+        },
+        "time": {
+          "type": "string",
+          "example": "string"
+        },
+        "video": {
+          "type": "string",
+          "example": "string"
+        },
+        "chapter": {
+          "type": "string",
+          "example": "string"
+        }
+      }
+    },
+    "EpisodeUpdate": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "example": "string"
+        },
+        "text": {
+          "type": "string",
+          "example": "string"
+        },
+        "type": {
+          "type": "string",
+          "example": "string"
+        },
+        "time": {
+          "type": "string",
+          "example": "string"
+        },
+        "video": {
+          "type": "string",
+          "example": "string"
+        }
+      }
+    },
+    "Role": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example": "string"
+        },
+        "title": {
+          "type": "string",
+          "example": "string"
+        },
+        "description": {
+          "type": "string",
+          "example": "string"
+        },
+        "permissions": {
+          "type": "string",
+          "example": "array"
+        },
+        "createdAt": {
+          "type": "string",
+          "example": "string"
+        },
+        "updatedAt": {
+          "type": "string",
+          "example": "string"
+        }
+      }
+    },
+    "RoleCreate": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "example": "string"
+        },
+        "description": {
+          "type": "string",
+          "example": "string"
+        },
+        "permissions": {
+          "type": "string",
+          "example": "array"
+        }
+      }
+    },
+    "RoleUpdate": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "example": "string"
+        },
+        "description": {
+          "type": "string",
+          "example": "string"
+        },
+        "permissions": {
+          "type": "string",
+          "example": "array"
+        }
+      }
+    },
+    "Permission": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example": "string"
+        },
+        "title": {
+          "type": "string",
+          "example": "string"
+        },
+        "description": {
+          "type": "string",
+          "example": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "example": "string"
+        },
+        "updatedAt": {
+          "type": "string",
+          "example": "string"
+        }
+      }
+    },
+    "PermissionCreate": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "example": "string"
+        },
+        "description": {
+          "type": "string",
+          "example": "string"
+        }
+      }
+    },
+    "PermissionUpdate": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "example": "string"
+        },
+        "description": {
+          "type": "string",
+          "example": "string"
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "BearerAuth": []
+    }
+  ]
+}

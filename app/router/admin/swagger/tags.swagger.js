@@ -19,4 +19,10 @@
  *      description : All methods and routes about category section
  *  -   name : Blog(AdminPanel)
  *      description : All methods and routes about Blog section
+ *  -   name : Message(Support)
+ *      description : All methods and routes about Message section
+ *  -   name : Namespace(Support)
+ *      description : All methods and routes about Namespace section
+ *  -   name : Room(Support)
+ *      description : All methods and routes about Room section
  */

@@ -35,4 +35,19 @@ function verifyAccessToken(req, res, next) {
   }
 }
 
-module.exports = { verifyAccessToken };
+async function verifyAccessTokenInGraphql(req, res) {
+  try {
+    const token = getToken(req.headers);
+    const { mobile } = JWT.verify(token, ACCESS_TOKEN_SECRET_KEY);
+    const user = await UserModel.findOne(
+      { mobile },
+      { password: 0, otp: 0, bills: 0 }
+    );
+    if (!user) throw createHttpError.Unauthorized("Profile didn't found");
+    return user;
+  } catch (error) {
+    throw new createHttpError.Unauthorized();
+  }
+}
+
+module.exports = { verifyAccessToken, getToken, verifyAccessTokenInGraphql };

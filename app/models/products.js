@@ -22,7 +22,7 @@ const ProductSchema = new mongoose.Schema(
     count: { type: Number },
     type: { type: String, required: true }, // physical or virtual
     format: { type: String },
-    supplier: { type: mongoose.Types.ObjectId, required: true },
+    supplier: { type: mongoose.Types.ObjectId, required: true, ref: "user" },
     features: {
       type: Object,
       default: {

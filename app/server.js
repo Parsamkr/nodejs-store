@@ -7,7 +7,10 @@ const createError = require("http-errors");
 const swaggerUI = require("swagger-ui-express");
 const swaggerJsDoc = require("swagger-jsdoc");
 const cors = require("cors");
-
+const databaseSeeder = require("./utils/seedDatabase");
+const expressEjsLayouts = require("express-ejs-layouts");
+const { initialSocket } = require("./utils/initSocketIO");
+const { socketHandler } = require("./socket.io");
 module.exports = class Application {
   #app = express();
   #PORT;
@@ -18,6 +21,7 @@ module.exports = class Application {
     this.#DB_URI = DB_URI;
     this.initRedis();
     this.connectToMongoDB();
+    this.initTemplateEngine();
     this.configApplication();
     this.createServer();
     this.createRoutes();
@@ -64,7 +68,10 @@ module.exports = class Application {
 
   createServer() {
     const http = require("http");
-    http.createServer(this.#app).listen(this.#PORT, () => {
+    const server = http.createServer(this.#app);
+    const io = initialSocket(server);
+    socketHandler(io);
+    server.listen(this.#PORT, () => {
       console.log("run on => http://localhost:" + this.#PORT);
     });
   }
@@ -74,7 +81,11 @@ module.exports = class Application {
     mongoose.set("strictQuery", true);
     mongoose
       .connect(this.#DB_URI)
-      .then(() => console.log("Successfully Connected to DB ..."))
+      .then(async () => {
+        console.log("Successfully Connected to DB ...");
+        // Seed database after successful connection
+        await databaseSeeder.seedDatabase();
+      })
       .catch((error) => {
         if (error) console.log(error.message);
       });
@@ -89,7 +100,16 @@ module.exports = class Application {
   }
 
   initRedis() {
-    require("./utils/init_redis");
+    require("./utils/initRedis");
+  }
+
+  initTemplateEngine() {
+    this.#app.use(expressEjsLayouts);
+    this.#app.set("view engine", "ejs");
+    this.#app.set("views", path.join(__dirname, "resources", "views"));
+    this.#app.set("layout", "layouts/master");
+    this.#app.set("layout extractScripts", true);
+    this.#app.set("layout extractStyles", true);
   }
 
   createRoutes() {

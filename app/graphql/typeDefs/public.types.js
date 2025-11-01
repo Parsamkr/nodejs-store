@@ -4,6 +4,14 @@ const {
   GraphQLString,
 } = require("graphql");
 const { Kind } = require("graphql/language");
+const { parseLiteral, toObject } = require("../utils");
+
+const AnyType = new GraphQLScalarType({
+  name: "AnyType",
+  parseValue: toObject,
+  serialize: toObject,
+  parseLiteral: parseLiteral,
+});
 
 const DateType = new GraphQLScalarType({
   name: "Date",
@@ -31,12 +39,12 @@ const AuthorType = new GraphQLObjectType({
   },
 });
 
-const CategoryType = new GraphQLObjectType({
-  name: "CategoryType",
+const PublicCategoryType = new GraphQLObjectType({
+  name: "PublicCategoryType",
   fields: {
     _id: { type: GraphQLString },
     title: { type: GraphQLString },
   },
 });
 
-module.exports = { DateType, AuthorType, CategoryType };
+module.exports = { DateType, AuthorType, PublicCategoryType, AnyType };
